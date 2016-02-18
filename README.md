@@ -9,12 +9,18 @@ It is written for the Arduino Uno/Nano R3 platform (Atmel 328p) and uses quite a
 
 ## Sensors currently in use
 
+
 InvenSense ITG3200 3-axis gyroscope to measure angular speed
+
 Analog Devices ADXL345 3-axis accelerometer to measure absolute rotation
+
 Honeywell HMC5883L 3-axis magnetometer to measure the orientation of the earth's magnetic field
+
 Bosch Sensortec BMP180 barometric pressure sensor to measure relative height
 
+
 Soon to be followed by:
+
 u-blox GPS module
 
 
