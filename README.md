@@ -6,7 +6,8 @@ This is an automatic stabilizing and auto-piloting system designed to be run in 
 
 It is written for the Arduino Uno/Nano R3 platform (Atmel 328p) and uses quite a few different sensoric units detailled in the next paragraph.
 
-The system is thought to have the following five major modes:  
+The system is thought to have the following five major modes:
+
 1. **Full Manual** mode  
  All channel information is passed through from the RC receiver to the servos without any modification. In this mode the system is only used to do the Elevon mixing.
 
@@ -36,7 +37,7 @@ The system is thought to have the following five major modes:
 * Bosch Sensortec **BMP180** barometric pressure sensor to measure _relative height_
 
 Soon to be followed by:  
-u-blox GPS module
+* u-blox GPS module
 
 
 ## Software functions currently implemented
