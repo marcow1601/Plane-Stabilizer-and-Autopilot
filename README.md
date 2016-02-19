@@ -43,3 +43,9 @@ Soon to be followed by:
 ## Software functions currently implemented
 
 TBA
+
+
+## External library dependencies
+
+[BMP180 library by Sparkfun](https://learn.sparkfun.com/tutorials/bmp180-barometric-pressure-sensor-hookup-/installing-the-arduino-library)  
+[GY-85 library by sqrtmo on GitHub](https://github.com/sqrtmo/GY-85-arduino)
