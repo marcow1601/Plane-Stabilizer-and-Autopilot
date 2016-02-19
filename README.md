@@ -31,9 +31,9 @@ The system is thought to have the following five major modes:
 ## Sensors currently in use
 
 
-* InvenSense **ITG3200** 3-axis gyroscope to measure _angular speed_  
-* Analog Devices **ADXL345** 3-axis accelerometer to measure _absolute rotation_  
-* Honeywell **HMC5883L** 3-axis magnetometer to measure the _orientation of the earth's magnetic field_  
+* InvenSense **ITG3200** 3-axis gyroscope to measure _angular velocity_  
+* Analog Devices **ADXL345** 3-axis accelerometer to measure the _orientation of the Earth's gravitational field_  
+* Honeywell **HMC5883L** 3-axis magnetometer to measure the _orientation of the Earth's magnetic field_  
 * Bosch Sensortec **BMP180** barometric pressure sensor to measure _relative height_
 
 Soon to be followed by:
@@ -43,6 +43,11 @@ Soon to be followed by:
 ## Software functions currently implemented
 
 TBA
+
+## Fusion of IMU data
+
+To provide an attitude estimation as precise as possible the data of several sensors needs to be filtered and fused.  
+I will be explaining this process in depth later on but if you are interested, have a look at OlliW's article [on his private blog](http://www.olliw.eu/2013/imu-data-fusing/) on this topic, which was a great help to me.
 
 
 ## External library dependencies

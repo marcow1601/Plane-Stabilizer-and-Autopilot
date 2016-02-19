@@ -14,6 +14,9 @@ Servo myservo;  // Controlling servos
 GY_85 GY85; // Reading IMU data
 
 // Declare and initialize variables
+// Time keepers
+unsigned long fullcycle = 0;
+
 // Servo
 int val = 90;
 int dir = 0;
@@ -39,8 +42,8 @@ void setup() {
   delay(10);
   
   // Setup serial connection
-  Serial.begin(9600);
-  delay(10)
+  Serial.begin(115200);
+  delay(10);
 
   // Initialize GY85 IMU
   GY85.init();
@@ -51,32 +54,30 @@ void setup() {
 }
 
 void loop() {
+  // Start timer of full cycle
+  fullcycle = millis();
   
-  /*Serial.println(val);
-  myservo.write(val);                  // sets the servo position according to the scaled value
+  // Reading GY-85 IMU raw sensor values
+  // 3-axis accelerometer data
+  ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
+  ay = GY85.accelerometer_y( GY85.readFromAccelerometer() );
+  az = GY85.accelerometer_z( GY85.readFromAccelerometer() );
 
-  if(dir==0) {
-    if(val >= 170){
-      dir = 1;
-    }
-    
-    else{
-      val += 3;
-    }
-  }
-  else {
-    if(val <= 20){
-      dir = 0;
-    }
-    else{
-      val -= 3;
-    }
-  }
-  
-  delay(15);*/
+  // 3-axis gyroscope data
+  gx = GY85.gyro_x( GY85.readGyro() );
+  gy = GY85.gyro_y( GY85.readGyro() );
+  gz = GY85.gyro_z( GY85.readGyro() );
+  gt = GY85.temp  ( GY85.readGyro() );
 
-  
+  // 3-axis compass data ##################### IMPORTANT: Calibrate compass in plane and store biases before use! ############################
+  cx = GY85.compass_x( GY85.readFromCompass() );
+  cy = GY85.compass_y( GY85.readFromCompass() );
+  cz = GY85.compass_z( GY85.readFromCompass() );
 
-  
+  // Calculate elapsed time during full cycle
+  fullcycle = millis() - fullcycle;
+
+  // Send cycle time over Serial
+  Serial.println(fullcycle);
 }
 
