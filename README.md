@@ -46,8 +46,11 @@ TBA
 
 ## Fusion of IMU data
 
-To provide an attitude estimation as precise as possible the data of several sensors needs to be filtered and fused.  
-I will be explaining this process in depth later on but if you are interested, have a look at OlliW's article [on his private blog](http://www.olliw.eu/2013/imu-data-fusing/) on this topic, which was a great help to me.
+To provide an attitude estimation as precise as possible the data of several sensors needs to be filtered and fused.
+
+I will be explaining this process in depth later on but if you are interested, have a look at OlliW's article [on his private blog](http://www.olliw.eu/2013/imu-data-fusing/) on this topic, which was a great help to me.  
+While the above article does a great job at explaining the theories mathematically, I want to thank [Kris Winer on GitHub](https://github.com/kriswiner) for providing and explaining the code implementation of the open source
+Madgwick & Mahony filter algorithms in such depth.
 
 
 ## External library dependencies

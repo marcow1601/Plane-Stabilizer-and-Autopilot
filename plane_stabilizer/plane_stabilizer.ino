@@ -28,7 +28,7 @@ unsigned long fullcycle = 0;
 int ax = 0;
 int ay = 0;
 int az = 0;
-// 3-axis gyroscope values (angular speed) + gyroscope temperature
+// 3-axis gyroscope values (angular velocity) + gyroscope temperature
 float gx = 0.0f;
 float gy = 0.0f;
 float gz = 0.0f;
