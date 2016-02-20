@@ -248,3 +248,4 @@ plane_stabilizer/plane_stabilizer.vcxproj
 plane_stabilizer/__vm/Configuration.Debug.vmps.xml
 plane_stabilizer/plane_stabilizer.vcxproj.filters
 plane_stabilizer/__vm/.plane_stabilizer.vsarduino.h
+plane_stabilizer/plane_stabilizer.sln
