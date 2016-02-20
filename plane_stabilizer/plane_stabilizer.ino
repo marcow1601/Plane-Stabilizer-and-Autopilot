@@ -1,25 +1,27 @@
-// Include library for BMP180 Barometric Sensor
+/* ##################################################
+ * ###### Include external libraries ################
+ * ###################################################
+ */
 #include <SFE_BMP180.h>
-
-// Include libraries for GY-85 IMU Sensor (Accelerometer, Gyro, Compass)
-#include <GY_85.h>
 #include <Wire.h>
-
-// Include library for driving elevon servos
+#include <GY_85.h>
 #include <Servo.h>
 
 
-// Creating objects
-Servo myservo;  // Controlling servos
-GY_85 GY85; // Reading IMU data
+/* ################################################## 
+ * ###### Include external headers ##################
+ * ##################################################
+ */
+#include "IMU.h" // Sensor data fusion
+#include "elevon.h" // Elevon actuations
 
-// Declare and initialize variables
+
+/* ################################################## 
+ * ###### Declare and initialize variables ##########
+ * ##################################################
+ */
 // Time keepers
 unsigned long fullcycle = 0;
-
-// Servo
-int val = 90;
-int dir = 0;
 
 // IMU
 // 3-axis accelerometer values (absolute angle)
@@ -36,6 +38,10 @@ int cx = 0;
 int cy = 0;
 int cz = 0;
 
+/* ################################################## 
+ * ###### Single execution setup routine ############
+ * ##################################################
+ */
 void setup() {
   // Setup I²C communications
   Wire.begin();
@@ -53,6 +59,10 @@ void setup() {
   myservo.attach(9);
 }
 
+/* ################################################## 
+ * ###### Infinite execution loop routine ###########
+ * ##################################################
+ */
 void loop() {
   // Start timer of full cycle
   fullcycle = millis();
