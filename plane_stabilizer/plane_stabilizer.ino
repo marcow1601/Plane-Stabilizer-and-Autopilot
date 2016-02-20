@@ -2,8 +2,8 @@
  * ###### Include external libraries ################
  * ###################################################
  */
-#include <SFE_BMP180.h>
 #include <Wire.h>
+#include <SFE_BMP180.h>
 #include <GY_85.h>
 #include <Servo.h>
 
@@ -12,7 +12,7 @@
  * ###### Include external headers ##################
  * ##################################################
  */
-#include "IMU.h" // Sensor data fusion
+#include "sensors.h" // Sensor data reading and fusion
 #include "elevon.h" // Elevon actuations
 
 
@@ -38,6 +38,18 @@ int cx = 0;
 int cy = 0;
 int cz = 0;
 
+// Barometer
+double baseline; // baseline pressure
+
+/* ##################################################
+ * ############ Object instantiation ################
+ * ##################################################
+ */
+// GY-85 IMU object
+GY_85 GY85;
+// BMP180 pressure object
+SFE_BMP180 BMP180;
+
 /* ################################################## 
  * ###### Single execution setup routine ############
  * ##################################################
@@ -55,8 +67,16 @@ void setup() {
   GY85.init();
   delay(10);
 
+  // Initialize BMP180 barometer (it is important to get calibration values stored on the device).
+  if (BMP180.begin())
+	  Serial.println("BMP180 init success");
+  else
+	  Serial.println("BMP180 init fail (disconnected?)\n\n");
+  // Get basline pressure of launch site
+  baseline = getPressure();
+
   // Attach driving pins to servo object(s)
-  myservo.attach(9);
+  //myservo.attach(9);
 }
 
 /* ################################################## 
@@ -66,6 +86,7 @@ void setup() {
 void loop() {
   // Start timer of full cycle
   fullcycle = millis();
+
   
   // Reading GY-85 IMU raw sensor values
   // 3-axis accelerometer data
