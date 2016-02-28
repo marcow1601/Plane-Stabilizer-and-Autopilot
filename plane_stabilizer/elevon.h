@@ -1,5 +1,7 @@
 // elevon.h
 
+
+
 #ifndef _ELEVON_h
 #define _ELEVON_h
 
@@ -11,4 +13,9 @@
 
 
 #endif
+
+//#include <Servo.h>
+
+// Create object(s) for controlling servos
+//Servo myservo;
 

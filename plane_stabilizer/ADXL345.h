@@ -12,6 +12,8 @@
 
 #endif
 
+#include "sensors.h"
+
 // ADXL345 registers
 #define ADXL345_ADDRESS					(0x53)    // Assumes ALT address pin low
 
@@ -76,6 +78,10 @@ enum Ascale {
 	AFS_16G			// +/- 16g
 };
 
+uint8_t Ascale = AFS_2G; // ADXL345 in +/- 2g mode
+uint8_t Arate = ARTBW_200_100; // 200 Hz ODR, 100 Hz bandwidth
+
+float aRes; // scale resolutions per LSB for the sensors
 
 void getAres();
 void readAccelData(int16_t * destination);

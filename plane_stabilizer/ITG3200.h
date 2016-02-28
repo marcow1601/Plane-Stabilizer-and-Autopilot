@@ -12,6 +12,8 @@
 
 #endif
 
+#include "sensors.h"
+
 // ITG3200 registers
 #define ITG3200_ADDRESS					(0x68)
 
@@ -43,6 +45,11 @@ enum
 	ITG3200_DLPF_FS_5Hz_1kHz = 0b00011110				// 5Hz / 1kHz
 
 };
+
+//uint8_t Gscale = 0x03; // ITG3200 in fullscale 2000°/s **fixed value for ITG3200
+uint8_t Grate = ITG3200_DLPF_FS_42Hz_1kHz;  // 200 Hz ODR,  50 Hz bandwidth
+
+float gRes; // scale resolutions per LSB for the sensors
 
 
 void getGres();
