@@ -2,12 +2,6 @@
  * ###### Include external libraries #################
  * ###################################################
  */
-// Sparkfun library for Barometric Pressure Sensor BMP180
-#include <SFE_BMP180.h>
-
-// Library for GY-85 IMU Sensor (Accelerometer, Gyro, Compass)
-#include <GY_85.h>
-
 // I²C/TWI library for (sensor) communications
 #include <Wire.h>
 
@@ -29,12 +23,12 @@
  * ############ Specify sensor parameters ############
  * ###################################################
  */
-/*uint8_t Gscale = 0x03; // ITG3200 in fullscale 2000°/s
+uint8_t Gscale = 0x03; // ITG3200 in fullscale 2000°/s
 uint8_t Grate = ;  // 200 Hz ODR,  50 Hz bandwidth
 uint8_t Ascale = 0x01; // ADXL345 in +/- 4g mode
 uint8_t Arate = ; // 200 Hz ODR, 100 Hz bandwidth
 uint8_t Mrate = ;        //  75 Hz ODR 
-uint8_t OSS = ;           // maximum pressure resolution*/
+uint8_t OSS = ;           // maximum pressure resolution
 float aRes, gRes, mRes; // scale resolutions per LSB for the sensors
 
 /* ###################################################
