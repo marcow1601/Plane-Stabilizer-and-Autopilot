@@ -51,7 +51,7 @@ void getGres() {
 
 void initITG3200()
 {
-	writeByte(ITG3200_ADDRESS, ITG3200_DLPF_FS, ITG3200_DLPF_FS_42Hz_1kHz);		// Set Digital Low Pass Filter Bandwidth and Internal Sample Rate, Gyro-Range: Full Scale +/- 2000 deg/sec
+	writeByte(ITG3200_ADDRESS, ITG3200_DLPF_FS, Grate);		// Set Digital Low Pass Filter Bandwidth and Internal Sample Rate, Gyro-Range: Full Scale +/- 2000 deg/sec
 	writeByte(ITG3200_ADDRESS, ITG3200_SMPLRT_DIV, 0x04);						// Set Sample Rate Divider to 4 to get 200Hz ODR
 	/*Interrupt Configuration:
 		Bit 7 "ACTL"-INT logic level: 1 = active low; 0 = active high
@@ -64,6 +64,7 @@ void initITG3200()
 		Bit 0 "RAW_RDY_EN"-Int when data available
 	*/
 	writeByte(ITG3200_ADDRESS, ITG3200_INT_CFG, 0b00100001); // Active High; Push-pull; Latch until INT cleared; cleared by status register read; enable data ready interrupt
+	writeByte(ITG3200_ADDRESS, ITG3200_PWR_MGM, 0x01); // No reset, no sleep, all axes active, Clock source: PLL with X Gyro reference
 
 }
 

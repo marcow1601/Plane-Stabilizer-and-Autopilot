@@ -28,21 +28,18 @@
  * ############ Specify sensor parameters ############
  * ###################################################
  */
-uint8_t Gscale = 0x03; // ITG3200 in fullscale 2000°/s
-uint8_t Grate = ;  // 200 Hz ODR,  50 Hz bandwidth
-uint8_t Ascale = 0x01; // ADXL345 in +/- 4g mode
-uint8_t Arate = ; // 200 Hz ODR, 100 Hz bandwidth
+//uint8_t Gscale = 0x03; // ITG3200 in fullscale 2000°/s **fixed value for ITG3200
+uint8_t Grate = ITG3200_DLPF_FS_42Hz_1kHz;  // 200 Hz ODR,  50 Hz bandwidth
+uint8_t Ascale = AFS_2G; // ADXL345 in +/- 2g mode
+uint8_t Arate = ARTBW_200_100; // 200 Hz ODR, 100 Hz bandwidth
 uint8_t Mrate = MRT_75;        //  75 Hz ODR 
-uint8_t OSS = ;           // maximum pressure resolution
+//uint8_t OSS = ;           // maximum pressure resolution
 float aRes, gRes, mRes; // scale resolutions per LSB for the sensors
 
 /* ###################################################
  * ############ BMP 180 calculations #################
  * ###################################################
  */
-// These are constants used to calulate the temperature and pressure from the BMP-085 sensor
-int16_t ac1, ac2, ac3, b1, b2, mb, mc, md, b5;
-uint16_t ac4, ac5, ac6;
 float temperature, pressure;
 
 
@@ -74,12 +71,6 @@ float   magbias[3];     // User-specified magnetometer corrections values
 #define zeta sqrt(3.0f / 4.0f) * GyroMeasDrift   // compute zeta, the other free parameter in the Madgwick scheme usually set to a small or zero value
 #define Kp 2.0f * 5.0f // these are the free parameters in the Mahony filter and fusion scheme, Kp for proportional feedback, Ki for integral
 #define Ki 0.0f
-
-float pitch, yaw, roll;
-float deltat = 0.0f;        // integration interval for both filter schemes
-
-uint32_t lastUpdate = 0; // used to calculate integration interval
-uint32_t Now = 0;        // used to calculate integration interval
 
 float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values 
 float q[4] = { 1.0f, 0.0f, 0.0f, 0.0f };    // vector to hold quaternion
