@@ -1,30 +1,43 @@
-/* ##################################################
- * ###### Include external libraries ################
- * ###################################################
- */
-#include <SFE_BMP180.h>
 #include <Wire.h>
-#include <Servo.h>
+
+#include "elevon.h"
+#include "IMU.h"
+#include "sensors.h"
+#include "BMP180.h"
+#include "HMC5883L.h"
+#include "ITG3200.h"
+#include "ADXL345.h"
+
+/* ##################################################
+* ###### Declare and initialize variables ##########
+* ##################################################
+*/
+/* ###################################################
+* ############### Raw Sensor Output #################
+* ###################################################
+*/
+int16_t accelCount[3];  // 16-bit signed accelerometer sensor output
+int16_t gyroCount[3];   // 16-bit signed gyro sensor output
+int16_t magCount[3];    // 16-bit signed magnetometer sensor output
+float   magbias[3];     // User-specified magnetometer corrections values
+
+float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values 
+float q[4] = { 1.0f, 0.0f, 0.0f, 0.0f };    // vector to hold quaternion
+float eInt[3] = { 0.0f, 0.0f, 0.0f };       // vector to hold integral error for Mahony method
 
 
-/* ################################################## 
- * ###### Include external headers ##################
- * ##################################################
- */
-#include "sensors.h"	// General sensor functionality
-#include "IMU.h"		// IMU data fusion
-#include "ADXL345.h"	// Accelerometer functionality
-#include "ITG3200.h"	// Gyroscope functionality
-#include "HMC5883L.h"	// Magnetometer functionality
 
-#include "elevon.h" // Elevon actuations
+											// IMU configuration parameters
+											//uint8_t Gscale = 0x03; // ITG3200 in fullscale 2000°/s **fixed value for ITG3200
+uint8_t Grate = ITG3200_DLPF_FS_42Hz_1kHz;  // 200 Hz ODR,  50 Hz bandwidth
+uint8_t Ascale = AFS_2G; // ADXL345 in +/- 2g mode
+uint8_t Arate = ARTBW_200_100; // 200 Hz ODR, 100 Hz bandwidth
+uint8_t Mrate = MRT_75;        //  75 Hz ODR 
+							   //uint8_t OSS = ;           // maximum pressure resolution
+float aRes, gRes, mRes; // scale resolutions per LSB for the sensors
 
 
-/* ################################################## 
- * ###### Declare and initialize variables ##########
- * ##################################################
- */
-// Latest orientational angles calculated
+						// Latest orientational angles calculated
 float pitch, yaw, roll;
 
 // Time keepers
@@ -34,11 +47,12 @@ uint32_t Now = 0;        // used to calculate integration interval
 float deltat = 0.0f;        // integration interval for both filter schemes
 
 
-// BMP180 object
+							// BMP180 object
 SFE_BMP180 BMP180;
 
 // Barometer
 double baseline; // baseline pressure (at launch site)
+float temperature, pressure;
 
 
 
@@ -116,6 +130,6 @@ void setup() {
  * ##################################################
  */
 void loop() {
-
+	
 }
 
