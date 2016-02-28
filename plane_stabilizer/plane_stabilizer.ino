@@ -2,9 +2,8 @@
  * ###### Include external libraries ################
  * ###################################################
  */
-#include <Wire.h>
 #include <SFE_BMP180.h>
-#include <GY_85.h>
+#include <Wire.h>
 #include <Servo.h>
 
 
@@ -12,7 +11,12 @@
  * ###### Include external headers ##################
  * ##################################################
  */
-#include "sensors.h" // Sensor data reading and fusion
+#include "sensors.h"	// General sensor functionality
+#include "IMU.h"		// IMU data fusion
+#include "ADXL345.h"	// Accelerometer functionality
+#include "ITG3200.h"	// Gyroscope functionality
+#include "HMC5883L.h"	// Magnetometer functionality
+
 #include "elevon.h" // Elevon actuations
 
 
@@ -41,14 +45,6 @@ int cz = 0;
 // Barometer
 double baseline; // baseline pressure
 
-/* ##################################################
- * ############ Object instantiation ################
- * ##################################################
- */
-// GY-85 IMU object
-GY_85 GY85;
-// BMP180 pressure object
-SFE_BMP180 BMP180;
 
 /* ################################################## 
  * ###### Single execution setup routine ############
@@ -63,20 +59,6 @@ void setup() {
   Serial.begin(115200);
   delay(10);
 
-  // Initialize GY85 IMU
-  GY85.init();
-  delay(10);
-
-  // Initialize BMP180 barometer (it is important to get calibration values stored on the device).
-  if (BMP180.begin())
-	  Serial.println("BMP180 init success");
-  else
-	  Serial.println("BMP180 init fail (disconnected?)\n\n");
-  // Get basline pressure of launch site
-  baseline = getPressure();
-
-  // Attach driving pins to servo object(s)
-  //myservo.attach(9);
 }
 
 /* ################################################## 
@@ -88,23 +70,6 @@ void loop() {
   fullcycle = millis();
 
   
-  // Reading GY-85 IMU raw sensor values
-  // 3-axis accelerometer data
-  ax = GY85.accelerometer_x( GY85.readFromAccelerometer() );
-  ay = GY85.accelerometer_y( GY85.readFromAccelerometer() );
-  az = GY85.accelerometer_z( GY85.readFromAccelerometer() );
-
-  // 3-axis gyroscope data
-  gx = GY85.gyro_x( GY85.readGyro() );
-  gy = GY85.gyro_y( GY85.readGyro() );
-  gz = GY85.gyro_z( GY85.readGyro() );
-  gt = GY85.temp  ( GY85.readGyro() );
-
-  // 3-axis compass data ##################### IMPORTANT: Calibrate compass in plane and store biases before use! ############################
-  cx = GY85.compass_x( GY85.readFromCompass() );
-  cy = GY85.compass_y( GY85.readFromCompass() );
-  cz = GY85.compass_z( GY85.readFromCompass() );
-
   // Calculate elapsed time during full cycle
   fullcycle = millis() - fullcycle;
 
