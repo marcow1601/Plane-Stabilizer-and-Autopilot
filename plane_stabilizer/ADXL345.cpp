@@ -4,6 +4,21 @@
 
 #include "ADXL345.h"
 
+/*#define ASCALE		(AFS_2G)
+
+#if ASCALE==AFS_2G
+#define ARES		(2.0 / (512.*64.))
+
+#elif ASCALE==AFS_4G
+#define ARES		(4.0 / (1024.*32.))
+
+#endif*/
+
+uint8_t Ascale = AFS_2G; // ADXL345 in +/- 2g mode
+uint8_t Arate = ARTBW_200_100; // 200 Hz ODR, 100 Hz bandwidth
+
+float aRes; // scale resolutions per LSB for the sensors
+
 /* ###################################################
 *  ##### Useful functions for accelerometer ##########
 *  ###################################################

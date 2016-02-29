@@ -4,6 +4,13 @@
 
 #include "BMP180.h"
 
+SFE_BMP180 BMP180;
+
+//uint8_t OSS = ;           // maximum pressure resolution
+
+double baseline; // baseline pressure (at launch site)
+float temperature, pressure;
+
 double getPressure()
 {
 	char status;

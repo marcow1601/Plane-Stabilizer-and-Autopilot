@@ -4,6 +4,27 @@
 
 #include "IMU.h"
 
+float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values 
+float q[4] = { 1.0f, 0.0f, 0.0f, 0.0f };    // vector to hold quaternion
+float eInt[3] = { 0.0f, 0.0f, 0.0f };       // vector to hold integral error for Mahony method
+
+											// Latest orientational angles calculated
+float pitch, yaw, roll;
+
+uint32_t lastUpdate = 0; // used to calculate integration interval
+uint32_t Now = 0;        // used to calculate integration interval
+
+float deltat = 0.0f;        // integration interval for both filter schemes
+
+							/* ###################################################
+							* ############### Raw Sensor Output #################
+							* ###################################################
+							*/
+int16_t accelCount[3];  // 16-bit signed accelerometer sensor output
+int16_t gyroCount[3];   // 16-bit signed gyro sensor output
+int16_t magCount[3];    // 16-bit signed magnetometer sensor output
+float   magbias[3];     // User-specified magnetometer corrections values
+
 /* ###################################################
 * ############### Hardware Setup ####################
 * ###################################################

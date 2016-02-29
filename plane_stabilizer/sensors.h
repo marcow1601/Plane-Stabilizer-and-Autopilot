@@ -9,9 +9,6 @@
 	#include "WProgram.h"
 #endif
 
-
-#endif
-
 #include <Wire.h>
 
 void writeCommand(uint8_t address, uint8_t command);
@@ -19,3 +16,4 @@ void writeByte(uint8_t address, uint8_t subAddress, uint8_t data);
 uint8_t readByte(uint8_t address, uint8_t subAddress);
 void readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8_t * dest);
 
+#endif

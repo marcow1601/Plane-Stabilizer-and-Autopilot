@@ -4,6 +4,10 @@
 
 #include "HMC5883L.h"
 
+uint8_t Mrate = MRT_75;        //  75 Hz ODR
+
+float mRes; // scale resolutions per LSB for the sensors
+
 /* ###################################################
 *  ####### Useful functions for magnetometer #########
 *  ###################################################

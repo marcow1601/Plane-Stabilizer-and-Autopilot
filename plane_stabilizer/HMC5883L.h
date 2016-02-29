@@ -9,9 +9,6 @@
 	#include "WProgram.h"
 #endif
 
-
-#endif
-
 #include "sensors.h"
 
 // HMC5883L registers
@@ -42,11 +39,13 @@ enum Mrate { // set magnetometer ODR
 	MRT_75,       // 75 Hz ODR    
 };
 
-uint8_t Mrate = MRT_75;        //  75 Hz ODR
 
-float mRes; // scale resolutions per LSB for the sensors
 
 void initHMC5883L();
 byte selfTestHMC5883L();
 void readMagData(int16_t * destination);
+
+#endif
+
+
 
