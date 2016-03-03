@@ -40,6 +40,7 @@ enum Mrate { // set magnetometer ODR
 };
 
 
+extern float mRes; // scale resolutions per LSB for the sensors
 
 void initHMC5883L();
 byte selfTestHMC5883L();

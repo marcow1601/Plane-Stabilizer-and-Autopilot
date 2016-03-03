@@ -25,6 +25,22 @@
 #define Kp 2.0f * 5.0f // these are the free parameters in the Mahony filter and fusion scheme, Kp for proportional feedback, Ki for integral
 #define Ki 0.0f
 
+extern float ax, ay, az, gx, gy, gz, mx, my, mz;
+
+extern float pitch, yaw, roll;
+
+extern uint32_t lastUpdate; // used to calculate integration interval
+extern uint32_t Now;        // used to calculate integration interval
+
+extern float deltat;        // integration interval for both filter schemes
+
+extern int16_t accelCount[3];  // 16-bit signed accelerometer sensor output
+extern int16_t gyroCount[3];   // 16-bit signed gyro sensor output
+extern int16_t magCount[3];    // 16-bit signed magnetometer sensor output
+extern float   magbias[3];     // User-specified magnetometer corrections values
+
+extern float q[4];    // vector to hold quaternion
+extern float eInt[3];       // vector to hold integral error for Mahony method
 
 void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
 void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);

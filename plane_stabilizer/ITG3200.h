@@ -44,7 +44,7 @@ enum
 };
 
 
-
+extern float gRes; // scale resolutions per LSB for the sensors
 
 void getGres();
 void initITG3200();

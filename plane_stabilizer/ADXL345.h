@@ -76,7 +76,7 @@ enum Ascale {
 };
 
 
-
+extern float aRes; // scale resolutions per LSB for the sensors
 
 void getAres();
 void readAccelData(int16_t * destination);
